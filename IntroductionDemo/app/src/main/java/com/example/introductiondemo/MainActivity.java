@@ -8,18 +8,18 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-
+    private String tag = "MainActivity";
 
     //interactivity through button
     //an ui for login.
     public void login(View view) {
 
-        EditText userNameEditText = findViewById(R.id.usernameEditText);
-        EditText passwordEditText = findViewById(R.id.passwordEditText);
+        EditText userNameEditText = (EditText) findViewById(R.id.usernameEditText);
+        EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
 
-        Log.i("Info", "Button Pressed");
-        Log.i("Username", userNameEditText.toString());
-        Log.i("passwordEditText", passwordEditText.toString());
+        Log.i(tag, "Button Pressed");
+        Log.i(tag,"Username " + userNameEditText.getText().toString());
+        Log.i(tag,"passwordEditText " +  passwordEditText.getText().toString());
     }
 
     @Override
