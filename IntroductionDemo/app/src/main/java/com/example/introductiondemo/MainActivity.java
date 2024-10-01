@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         Log.i(tag, "Button Pressed");
         Log.i(tag,"Username " + userNameEditText.getText().toString());
         Log.i(tag,"passwordEditText " +  passwordEditText.getText().toString());
+
+        // displaying text, its called toast.
+        Toast.makeText(this, "Hi there! Button Pressed", Toast.LENGTH_SHORT).show();
     }
 
     @Override
