@@ -2,6 +2,7 @@ package com.example.eggtimer;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
@@ -10,9 +11,34 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    TextView countDownTextView;
+    SeekBar timerSeekBar;
 
     public void buttonClicked(View view) {
         Log.i("Button Pressed", "Button working");
+
+        CountDownTimer countDownTimer = new CountDownTimer(timerSeekBar.getProgress()* 1000L, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                updateTimer((int)millisUntilFinished/1000);
+            }
+
+            @Override
+            public void onFinish() {
+                Log.i("Finished", "Timer all done");
+            }
+        }.start();
+    }
+
+    public void updateTimer(int secondsLeft) {
+        int minutes = secondsLeft/60;
+        int seconds = secondsLeft - (minutes * 60);
+
+        String secondString = Integer.toString(seconds);
+        if (seconds < 10) {
+            secondString = "0" + secondString;
+        }
+        countDownTextView.setText(minutes + ":" + secondString);
     }
 
     @Override
@@ -20,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SeekBar timerSeekBar = findViewById(R.id.timerSeekBar);
-        TextView countDownTextView = findViewById(R.id.countDownTextView);
+        timerSeekBar = findViewById(R.id.timerSeekBar);
+        countDownTextView = findViewById(R.id.countDownTextView);
 
         timerSeekBar.setMax(10*60);
         timerSeekBar.setProgress(30);
@@ -29,14 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                int minutes = progress/60;
-                int seconds = progress - (minutes * 60);
-
-                String secondString = Integer.toString(seconds);
-                if (secondString.equals("0")) {
-                    secondString = "00";
-                }
-                countDownTextView.setText(minutes + ":" + secondString);
+                updateTimer(progress);
             }
 
             @Override
