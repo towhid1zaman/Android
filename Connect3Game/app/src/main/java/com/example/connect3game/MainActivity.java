@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
                     gameActive = false;
                     String winningPlayer = (player == 0) ? "Red" : "Yellow"; // reverse, always changed value after checked
 
-                    Button playAgainButton = (Button) findViewById(R.id.playAgainButton);
-                    TextView winnerTextView = (TextView) findViewById(R.id.winnerTextView);
+                    Button playAgainButton = findViewById(R.id.playAgainButton);
+                    TextView winnerTextView = findViewById(R.id.winnerTextView);
 
                     winnerTextView.setText(winningPlayer + " has won!");
                     winnerTextView.setVisibility(View.VISIBLE);
@@ -61,21 +61,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         } else if (gameActive) {
-            Button playAgainButton = (Button) findViewById(R.id.playAgainButton);
-            playAgainButton.setVisibility(View.VISIBLE);
+            playAgain(view);
         }
     }
 
     public void playAgain(View view) {
         // reset all
-
-        Button playAgainButton = (Button) findViewById(R.id.playAgainButton);
-        TextView winnerTextView = (TextView) findViewById(R.id.winnerTextView);
+        Log.i("PlayAgainButton: ", "Play again button entered");
+        Button playAgainButton = findViewById(R.id.playAgainButton);
+        TextView winnerTextView = findViewById(R.id.winnerTextView);
         winnerTextView.setVisibility(View.INVISIBLE);
         playAgainButton.setVisibility(View.INVISIBLE);
-
-        GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout);
+        Log.i("afterInvisible", "Invisible Done");
+        androidx.gridlayout.widget.GridLayout gridLayout = findViewById(R.id.gridLayout);
+        Log.i("grid", "gridLayout");
         for(int i = 0; i < gridLayout.getChildCount(); i++) {
+            Log.i("GridLayout", "Loop: "+ i);
             ImageView counter = (ImageView) gridLayout.getChildAt(i);
             // do stuff with child view
             counter.setImageDrawable(null);
