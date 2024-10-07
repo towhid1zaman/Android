@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -14,33 +15,51 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     TextView countDownTextView;
     SeekBar timerSeekBar;
+    Boolean counterIsActive = false;
+    Button goButton;
+    CountDownTimer countDownTimer;
+
+    public void resetTimer() {
+        countDownTextView.setText("00:30");
+        timerSeekBar.setProgress(30);
+        timerSeekBar.setEnabled(true);
+        countDownTimer.cancel();
+        goButton.setText("GO!");
+        counterIsActive = false;
+    }
 
     public void buttonClicked(View view) {
         Log.i("Button Pressed", "Button working");
+        if (counterIsActive) {
+            resetTimer();
+        } else {
+            counterIsActive = true;
+            timerSeekBar.setEnabled(false);
+            goButton.setText("STOP!");
 
-        CountDownTimer countDownTimer = new CountDownTimer(timerSeekBar.getProgress()* 1000L + 100, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                updateTimer((int)millisUntilFinished/1000);
-            }
+            countDownTimer = new CountDownTimer(timerSeekBar.getProgress() * 1000L + 100, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    updateTimer((int) millisUntilFinished / 1000);
+                }
 
-            @Override
-            public void onFinish() {
-                MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.airhorn);
-                mediaPlayer.start();
-            }
-        }.start();
+                @Override
+                public void onFinish() {
+                    MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.airhorn);
+                    mediaPlayer.start();
+                    resetTimer();
+                }
+            }.start();
+        }
     }
 
     public void updateTimer(int secondsLeft) {
-        int minutes = secondsLeft/60;
-        int seconds = secondsLeft - (minutes * 60);
+        int minutes = secondsLeft/60; // number of minutes
+        int seconds = secondsLeft - (minutes * 60); // number of seconds left
 
-        String secondString = Integer.toString(seconds);
-        if (seconds < 10) {
-            secondString = "0" + secondString;
-        }
-        countDownTextView.setText(minutes + ":" + secondString);
+        String secondsString;
+        secondsString = String.format("%02d", seconds);
+        countDownTextView.setText(Integer.toString(minutes) + ":" + secondsString);
     }
 
     @Override
@@ -50,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         timerSeekBar = findViewById(R.id.timerSeekBar);
         countDownTextView = findViewById(R.id.countDownTextView);
+        goButton = findViewById(R.id.goButton);
+
 
         timerSeekBar.setMax(10*60);
         timerSeekBar.setProgress(30);
