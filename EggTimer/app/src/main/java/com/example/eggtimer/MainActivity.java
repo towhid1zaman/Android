@@ -1,6 +1,7 @@
 package com.example.eggtimer;
 
 import android.annotation.SuppressLint;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     public void buttonClicked(View view) {
         Log.i("Button Pressed", "Button working");
 
-        CountDownTimer countDownTimer = new CountDownTimer(timerSeekBar.getProgress()* 1000L, 1000) {
+        CountDownTimer countDownTimer = new CountDownTimer(timerSeekBar.getProgress()* 1000L + 100, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateTimer((int)millisUntilFinished/1000);
@@ -25,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Log.i("Finished", "Timer all done");
+                MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.airhorn);
+                mediaPlayer.start();
             }
         }.start();
     }
