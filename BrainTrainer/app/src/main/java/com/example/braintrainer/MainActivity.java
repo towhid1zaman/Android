@@ -18,4 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         goButton = findViewById(R.id.goButton);
     }
+
+    public void chooseAnswer(View view) {
+    }
 }
