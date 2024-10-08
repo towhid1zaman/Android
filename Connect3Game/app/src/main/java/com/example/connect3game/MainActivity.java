@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
                     playAgainButton.setVisibility(View.VISIBLE);
                 }
             }
-        } else if (gameActive) {
-            playAgain(view);
         }
     }
 
