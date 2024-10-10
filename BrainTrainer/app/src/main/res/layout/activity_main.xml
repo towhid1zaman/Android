@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/holo_purple"
                 android:onClick="chooseAnswer"
-                android:tag="=1"
+                android:tag="1"
                 android:text="14"
                 android:textSize="80sp"
                 app:layout_column="1"

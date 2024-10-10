@@ -1,7 +1,7 @@
 package com.example.braintrainer;
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         score = 0;
         numberOfQuestions = 0;
         timerTextView.setText("30s");
-        scoreTextView.setText(Integer.toString(score)+"/"+Integer.toString(numberOfQuestions));
+        scoreTextView.setText(score +"/"+ numberOfQuestions);
         newQuestion();
         playAgainButton.setVisibility(View.INVISIBLE);
         resultTextView.setText("");
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTick(long l) {
-                timerTextView.setText(String.valueOf(l / 1000) + "s");
+                timerTextView.setText(l / 1000 + "s");
             }
 
             @Override
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void chooseAnswer(View view) {
+        Log.i("CorrectAnswer()", "locationOfCorrectAnswer: "+ locationOfCorrectAnswer + "and Tag: " + view.getTag().toString());
         if (Integer.toString(locationOfCorrectAnswer).equals(view.getTag().toString())) {
             resultTextView.setText("Correct!");
             score++;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             resultTextView.setText("Wrong :(");
         }
         numberOfQuestions++;
-        scoreTextView.setText(Integer.toString(score)+"/"+Integer.toString(numberOfQuestions));
+        scoreTextView.setText(score +"/"+ numberOfQuestions);
         newQuestion();
     }
 
@@ -79,12 +80,12 @@ public class MainActivity extends AppCompatActivity {
         int a = rand.nextInt(21);
         int b = rand.nextInt(21);
 
-        sumTextView.setText(Integer.toString(a) + " + " + Integer.toString(b));
+        sumTextView.setText(a + " + " + b);
 
         locationOfCorrectAnswer = rand.nextInt(4);
 
         answers.clear();
-
+        Log.i("newQuestion", "locationOfCorrectAnswer: " + locationOfCorrectAnswer);
         for (int i=0; i<4; i++) {
             if (i == locationOfCorrectAnswer) {
                 answers.add(a+b);
