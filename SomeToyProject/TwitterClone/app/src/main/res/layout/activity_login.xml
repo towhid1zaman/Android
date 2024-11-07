@@ -19,9 +19,37 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_centerHorizontal="true"
-              android:src="@drawable/title">
+              android:src="@drawable/title"
+              android:layout_margin="@dimen/grid_2x"/>
+          <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/emailTIL"
+              android:layout_width="@dimen/standard_width"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/imageView"
+              android:layout_centerHorizontal="true"
+              android:layout_margin="@dimen/grid_2x">
+          <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/emailET"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:inputType="textEmailAddress"
+              android:hint="@string/hint_email"/>
+          </com.google.android.material.textfield.TextInputLayout>
 
-          </ImageView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordTIL"
+                android:layout_width="@dimen/standard_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/emailTIL"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/grid_2x">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="@string/hint_password"/>
+            </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
     <LinearLayout
