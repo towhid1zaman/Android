@@ -50,6 +50,26 @@
                     android:inputType="textPassword"
                     android:hint="@string/hint_password"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/buttonLogin"
+                android:layout_width="@dimen/standard_width"
+                android:layout_height="@dimen/standard_height"
+                android:layout_below="@id/passwordTIL"
+                android:layout_centerHorizontal="true"
+                style="@style/StandardButton"
+                android:text="@string/button_login"
+                android:layout_margin="@dimen/grid_2x"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buttonLogin"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/grid_2x"
+                android:clickable="true"
+                style="@style/LinkText"
+                android:text="@string/text_signup"
+                />
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
     <LinearLayout
