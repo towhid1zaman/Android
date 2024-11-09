@@ -3,12 +3,10 @@ package towhid1zaman.toyproject.simplenoti;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.view.View;
 
+import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -36,20 +34,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NotificationChannel channel =  new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
         channel.setDescription(CHANNEL_DESC);
 
         NotificationManager manager = getSystemService(NotificationManager.class);
         manager.createNotificationChannel(channel);
 
-        findViewById(R.id.buttonNotify).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayNotification();
-            }
-        });
+        findViewById(R.id.buttonNotify).setOnClickListener(v -> displayNotification());
     }
-
+    
     private void displayNotification() {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this,CHANNEL_ID)
@@ -60,17 +53,9 @@ public class MainActivity extends AppCompatActivity {
 
         NotificationManagerCompat mNotificationMgr = NotificationManagerCompat.from(this);
 
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            mNotificationMgr.notify(1, mBuilder.build());
         }
-        mNotificationMgr.notify(1, mBuilder.build());
     }
 
 }
