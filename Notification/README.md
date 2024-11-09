@@ -7,8 +7,8 @@ Notification usually come from remotely. Lets say, whatsapp notification come fr
 
 To display notification from a application need 3 things,
 
-1. Notification  Channel
+1. Notification  Channel:  Required on Android 8.0 (API level 26) and higher; it groups notifications and lets users control importance levels.
 
-2. Notification Builder
+2. Notification Builder: Used to build notifications with essential attributes, like title, text, and icon.
 
-3. Notification Manager
+3. Notification Manager: Handles the notification display; you call it to send the notification.
