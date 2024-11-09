@@ -1,9 +1,14 @@
 package towhid1zaman.toyproject.simplenoti;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -15,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
      *      2. Notification Builder
      *      3. Notification Manager
      *
-     *      Again, for Notification channel, need 4 things,
+     *      Again, for Notification channel, need 3 things,
      *          1. Channel ID
      *          2. Channel Name
      *          3. Channel Description
@@ -30,6 +35,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        NotificationChannel channel =  new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+        channel.setDescription(CHANNEL_DESC);
+
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        manager.createNotificationChannel(channel);
+
+        findViewById(R.id.buttonNotify).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayNotification();
+            }
+        });
     }
 
     private void displayNotification() {
@@ -54,4 +72,5 @@ public class MainActivity extends AppCompatActivity {
         }
         mNotificationMgr.notify(1, mBuilder.build());
     }
+
 }
