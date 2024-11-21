@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "towhid1zaman.toyproject.simplenoticounter"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "towhid1zaman.toyproject.simplenoticounter"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 

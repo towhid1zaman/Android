@@ -21,9 +21,10 @@ class CounterNotificationService(private val context: Context) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
         )
         val incremnetIntent = PendingIntent.getBroadcast(
-            context, 2, Intent(
-                context, CounterNotificationReceiver::class.java
-            ),
+            context, 2,
+            Intent(context, CounterNotificationReceiver::class.java).apply {
+                putExtra("my_extra", 5)
+            },
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
         )
         val notification = NotificationCompat.Builder(context, COUNTER_CHANNEL_ID)
