@@ -8,4 +8,9 @@ It is an container for rendering larger data set of views that can be recycled a
 Examle: Anything that can scrollable, there could be use recycler view.
 
 
+>Process inside RecyclerView
+
+[Data Source] -> [Adapter] -- ViewHolder---> [RecylerView]
+
+
 
