@@ -9,6 +9,7 @@ Examle: Anything that can scrollable, there could be use recycler view.
 
 
 >Process inside RecyclerView
-![alt text](Capture.PNG)
+
+![alt text](RecyclerViewProcess.PNG)
 
 [Data Source] -> [Adapter] -- ViewHolder1, ViewHolder2 .. ---> [RecylerView]
