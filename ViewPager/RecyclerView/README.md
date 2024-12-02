@@ -9,7 +9,6 @@ Examle: Anything that can scrollable, there could be use recycler view.
 
 
 >Process inside RecyclerView
-
-$C:\Users\HP\Pictures\Capture.PNG$
+![alt text](Capture.PNG)
 
 [Data Source] -> [Adapter] -- ViewHolder1, ViewHolder2 .. ---> [RecylerView]
