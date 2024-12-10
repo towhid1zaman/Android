@@ -25,6 +25,18 @@ public class MainActivity extends AppCompatActivity {
         arrContact.add(new ContactModel(R.drawable.d, "Namaz", "01933223333"));
         arrContact.add(new ContactModel(R.drawable.e, "Maanz", "01934233333"));
         arrContact.add(new ContactModel(R.drawable.f, "Zanam", "01433233333"));
-        arrContact.add(new ContactModel(R.drawable.f, "Aaamn", "01433233333"));
+        arrContact.add(new ContactModel(R.drawable.g, "Aaamn", "01233233333"));
+        arrContact.add(new ContactModel(R.drawable.a, "Towhid", "01133233333"));
+        arrContact.add(new ContactModel(R.drawable.b, "Dihwot", "01233233333"));
+        arrContact.add(new ContactModel(R.drawable.c, "Hidwot", "01333232333"));
+        arrContact.add(new ContactModel(R.drawable.d, "Wtohid", "01433223333"));
+        arrContact.add(new ContactModel(R.drawable.e, "Otwhid", "01534233333"));
+        arrContact.add(new ContactModel(R.drawable.f, "Hwtoid", "01633233333"));
+        arrContact.add(new ContactModel(R.drawable.g, "Dhitow", "01733233333"));
+
+        for (int i = 0; i < arrContact.size(); i++) {
+
+        }
+
     }
 }
