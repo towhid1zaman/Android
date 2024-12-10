@@ -16,9 +16,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RecyclerView recyclerView = findViewById(R.id.recyclerContact);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = findViewById(R.id.recyclerContact);
+        recyclerView.setLayoutManager(layoutManager);
+
         arrContact.add(new ContactModel(R.drawable.a, "Zaman", "01933233333"));
         arrContact.add(new ContactModel(R.drawable.b, "Amzan", "01933233333"));
         arrContact.add(new ContactModel(R.drawable.c, "Mazan", "01933232333"));
