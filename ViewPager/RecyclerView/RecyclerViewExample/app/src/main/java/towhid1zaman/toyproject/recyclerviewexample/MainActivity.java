@@ -16,9 +16,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         RecyclerView recyclerView = findViewById(R.id.recyclerContact);
         recyclerView.setLayoutManager(layoutManager);
 
