@@ -7,7 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<ContactModel>contactModels;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
