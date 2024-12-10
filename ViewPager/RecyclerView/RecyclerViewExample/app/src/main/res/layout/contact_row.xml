@@ -25,7 +25,7 @@
                 android:layout_height="70dp"
                 android:background="#C6F492"
                 android:contentDescription="Contact Image"
-                tools:srcCompat="@color/cardview_dark_background"
+                tools:srcCompat="@drawable/a"
                 />
 
             <LinearLayout

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<ContactModel>contactModels;
+    ArrayList<ContactModel>arrContact = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,5 +19,12 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerContact);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        arrContact.add(new ContactModel(R.drawable.a, "Zaman", "01933233333"));
+        arrContact.add(new ContactModel(R.drawable.b, "Amzan", "01933233333"));
+        arrContact.add(new ContactModel(R.drawable.c, "Mazan", "01933232333"));
+        arrContact.add(new ContactModel(R.drawable.d, "Namaz", "01933223333"));
+        arrContact.add(new ContactModel(R.drawable.e, "Maanz", "01934233333"));
+        arrContact.add(new ContactModel(R.drawable.f, "Zanam", "01433233333"));
+        arrContact.add(new ContactModel(R.drawable.f, "Aaamn", "01433233333"));
     }
 }
