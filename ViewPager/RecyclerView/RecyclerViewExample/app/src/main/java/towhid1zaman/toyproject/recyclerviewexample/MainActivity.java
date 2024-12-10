@@ -34,9 +34,7 @@ public class MainActivity extends AppCompatActivity {
         arrContact.add(new ContactModel(R.drawable.f, "Hwtoid", "01633233333"));
         arrContact.add(new ContactModel(R.drawable.g, "Dhitow", "01733233333"));
 
-        for (int i = 0; i < arrContact.size(); i++) {
-
-        }
-
+        RecyclerContactAdapter recyclerContactAdapter = new RecyclerContactAdapter(this, arrContact);
+        recyclerView.setAdapter(recyclerContactAdapter);
     }
 }
