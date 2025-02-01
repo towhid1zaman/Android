@@ -1,47 +1,47 @@
 package towhid1zaman.toyproject.loginscreen
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import towhid1zaman.toyproject.loginscreen.ui.theme.LoginScreenTheme
 
-class MainActivity : ComponentActivity() {
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import towhid1zaman.toyproject.loginscreen.presenter.LoginPresenter
+import towhid1zaman.toyproject.loginscreen.view.LoginView
+
+
+class MainActivity : AppCompatActivity(), LoginView {
+
+    private lateinit var presenter: LoginPresenter
+    private lateinit var etUsername: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var btnLogin: Button
+    private lateinit var tvMessage: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            LoginScreenTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        setContentView(R.layout.activity_main)
+
+        etUsername = findViewById(R.id.etUsername)
+        etPassword = findViewById(R.id.etPassword)
+        btnLogin = findViewById(R.id.btnLogin)
+        tvMessage = findViewById(R.id.tvMessage)
+
+        presenter = LoginPresenter(this)
+
+        btnLogin.setOnClickListener {
+            val username = etUsername.text.toString()
+            val password = etPassword.text.toString()
+            presenter.login(username, password)
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    LoginScreenTheme {
-        Greeting("Android")
+    override fun onLoginSuccess(message: String) {
+        TODO("Not yet implemented")
     }
+
+    override fun onLoginError(message: String) {
+        TODO("Not yet implemented")
+    }
+
 }
