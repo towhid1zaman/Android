@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.towhid1zaman.focustimer"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.towhid1zaman.focustimer"
