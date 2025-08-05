@@ -102,10 +102,6 @@ com.towhid1zaman.focustimer\
 📥 [Download Latest APK](https://github.com/towhid1zaman/Android/releases/tag/v1.0/FocusTimer.apk)
 ---
 
-##  Developed by  
-[Towhid Zaman](https://github.com/towhid1zaman)
----
-
 
 
 
