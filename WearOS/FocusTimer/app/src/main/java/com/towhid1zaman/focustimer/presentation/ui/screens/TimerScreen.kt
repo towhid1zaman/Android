@@ -14,22 +14,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.towhid1zaman.focustimer.presentation.domain.model.SessionType
+import com.towhid1zaman.focustimer.presentation.ui.components.CircularTimer
+import com.towhid1zaman.focustimer.presentation.ui.components.SessionTypeSelector
+import com.towhid1zaman.focustimer.presentation.ui.components.TimerControls
+import com.towhid1zaman.focustimer.presentation.util.formatTime
+import com.towhid1zaman.focustimer.presentation.util.VibrationHelper
 import com.towhid1zaman.focustimer.presentation.viewmodel.TimerViewModel
-import java.util.concurrent.TimeUnit
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun TimerScreen(viewModel: TimerViewModel = viewModel()) {
     val timerState by viewModel.timerState.collectAsState()
 
-    val minutes = TimeUnit.MILLISECONDS.toMinutes(timerState.timeLeftMillis)
-    val seconds = TimeUnit.MILLISECONDS.toSeconds(timerState.timeLeftMillis) % 60
-
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SessionTypeSelector(
@@ -40,85 +38,23 @@ fun TimerScreen(viewModel: TimerViewModel = viewModel()) {
             }
         )
 
-        Text(
-            text = String.format("%02d:%02d", minutes, seconds),
-            style = MaterialTheme.typography.headlineMedium
+        CircularTimer(
+            progress = viewModel.getProgress(),
+            timeText = formatTime(timerState.timeLeftMillis)
         )
-
         // Adds vertical space between the timer and the buttons
         //Spacer(modifier = Modifier.height(8.dp))
-
-        Row {
-            val context = LocalContext.current
-            Button(
-                onClick = {
-                    viewModel.startTimer {
-                        // Vibrate on finish
-                        val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                            val manager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-                            manager.defaultVibrator
-                        } else {
-                            @Suppress("DEPRECATION")
-                            context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-                        }
-                        Log.d("TIMER", "Vibration should happen now!")
-                        vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
-                    }
-                },
-                enabled = !timerState.isRunning
-            ) {
-                Text("Start")
-            }
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Button(onClick = { viewModel.pauseTimer() }, enabled = timerState.isRunning) {
-                Text("Pause")
-            }
-        }
-
-        Spacer(modifier = Modifier.width(8.dp))
-
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Button(
-                modifier = Modifier
-                    .padding(bottom = 8.dp),
-                onClick = { viewModel.resetTimer() }
-            ) {
-                Text("Reset")
-            }
-        }
-    }
-}
-
-@Composable
-fun SessionTypeSelector(
-    selectedSession: SessionType,
-    onSessionSelected: (SessionType) -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 25.dp, start = 5.dp, end = 5.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        SessionType.entries.forEach { session ->
-            Button(
-                onClick = { onSessionSelected(session) },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (session == selectedSession) Color.Green else Color.Gray
-                ),
-                modifier = Modifier
-                    .height(40.dp)
-                    .weight(1f)
-                    .padding(horizontal = 2.dp)
-            ) {
-                Text(text = session.displayName, fontSize = 12.sp)
-            }
-        }
+        val context = LocalContext.current
+        TimerControls(
+            timerState = timerState,
+            onStart = {
+                viewModel.startTimer{
+                    VibrationHelper.vibrate(context)
+                }
+            },
+            onPause = {viewModel.pauseTimer()},
+            onReset = {viewModel.resetTimer()}
+        )
     }
 }
 

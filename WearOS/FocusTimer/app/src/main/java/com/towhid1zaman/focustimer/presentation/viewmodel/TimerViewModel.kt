@@ -71,6 +71,12 @@ class TimerViewModel : ViewModel() {
             sessionType = sessionType
         )
     }
+
+    fun getProgress(): Float {
+        val current = _timerState.value.timeLeftMillis.toFloat()
+        val total = _timerState.value.sessionType.durationMillis.toFloat()
+        return 1f - (current / total)
+    }
 }
 
 
