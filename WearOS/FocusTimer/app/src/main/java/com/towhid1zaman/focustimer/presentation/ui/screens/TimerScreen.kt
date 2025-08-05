@@ -1,10 +1,17 @@
 package com.towhid1zaman.focustimer.presentation.ui.screens
 
+import android.content.Context
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.os.VibratorManager
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.towhid1zaman.focustimer.presentation.viewmodel.TimerViewModel
@@ -31,7 +38,24 @@ fun TimerScreen(viewModel: TimerViewModel = viewModel()) {
         Spacer(modifier = Modifier.height(12.dp))
 
         Row {
-            Button(onClick = { viewModel.startTimer() }, enabled = !timerState.isRunning) {
+            val context = LocalContext.current
+            Button(
+                onClick = {
+                    viewModel.startTimer {
+                        // Vibrate on finish
+                        val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                            val manager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+                            manager.defaultVibrator
+                        } else {
+                            @Suppress("DEPRECATION")
+                            context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                        }
+                        Log.d("TIMER", "Vibration should happen now!")
+                        vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
+                    }
+                },
+                enabled = !timerState.isRunning
+            ) {
                 Text("Start")
             }
 

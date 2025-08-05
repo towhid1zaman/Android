@@ -15,7 +15,8 @@ class TimerViewModel : ViewModel() {
 
     private var timerJob: Job? = null
 
-    fun startTimer() {  // Starts a new coroutine and saves its reference in timerJob
+    fun startTimer(onTimerFinished: () -> Unit = {}) {  // Added callback
+        // Starts a new coroutine and saves its reference in timerJob
         if (_timerState.value.isRunning) return
         Log.d("TIMER", "Timer started")
 
@@ -44,6 +45,8 @@ class TimerViewModel : ViewModel() {
                 isRunning =  false,
                 isFinished = true
             )
+
+            onTimerFinished() // Callback to UI for vibration
         }
     }
 
@@ -57,7 +60,7 @@ class TimerViewModel : ViewModel() {
 
     fun resetTimer() { // Also cancels the countdown coroutine and resets state
         timerJob?.cancel()
-        _timerState.value = TimerState() // resets to default (25 minutes)
+        _timerState.value = TimerState() // resets to default
     }
 }
 

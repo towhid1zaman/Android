@@ -2,8 +2,8 @@ package com.towhid1zaman.focustimer.presentation.viewmodel
 
 data class TimerState (
     val isRunning: Boolean =  false,
-    val timeLeftMillis: Long = 25*60*1000L, // default 25 minutes
-    val totalTimeMillis: Long = 25*60*1000L,
+    val timeLeftMillis: Long = 2*60*1000L, // default 2 minutes
+    val totalTimeMillis: Long = 2*60*1000L,
     val isFinished: Boolean = false,
     val isPaused: Boolean = false
 )
