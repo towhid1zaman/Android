@@ -3,6 +3,7 @@ package com.towhid1zaman.focustimer.presentation.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.towhid1zaman.focustimer.presentation.domain.model.SessionType
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -61,6 +62,14 @@ class TimerViewModel : ViewModel() {
     fun resetTimer() { // Also cancels the countdown coroutine and resets state
         timerJob?.cancel()
         _timerState.value = TimerState() // resets to default
+    }
+
+    fun setSession(sessionType: SessionType) {
+        timerJob?.cancel() // cancel running if switching
+        _timerState.value = TimerState(
+            timeLeftMillis = sessionType.durationMillis,
+            sessionType = sessionType
+        )
     }
 }
 

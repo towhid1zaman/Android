@@ -14,8 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.towhid1zaman.focustimer.presentation.domain.model.SessionType
 import com.towhid1zaman.focustimer.presentation.viewmodel.TimerViewModel
 import java.util.concurrent.TimeUnit
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun TimerScreen(viewModel: TimerViewModel = viewModel()) {
@@ -29,13 +32,21 @@ fun TimerScreen(viewModel: TimerViewModel = viewModel()) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        SessionTypeSelector(
+         selectedSession = timerState.sessionType,
+            onSessionSelected = {
+                session ->
+                viewModel.setSession(session)
+            }
+        )
+
         Text(
             text = String.format("%02d:%02d", minutes, seconds),
-            style = MaterialTheme.typography.headlineLarge
+            style = MaterialTheme.typography.headlineMedium
         )
 
         // Adds vertical space between the timer and the buttons
-        Spacer(modifier = Modifier.height(12.dp))
+        //Spacer(modifier = Modifier.height(8.dp))
 
         Row {
             val context = LocalContext.current
@@ -72,12 +83,45 @@ fun TimerScreen(viewModel: TimerViewModel = viewModel()) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(onClick = { viewModel.resetTimer() }) {
+            Button(
+                modifier = Modifier
+                    .padding(bottom = 8.dp),
+                onClick = { viewModel.resetTimer() }
+            ) {
                 Text("Reset")
             }
         }
     }
 }
+
+@Composable
+fun SessionTypeSelector(
+    selectedSession: SessionType,
+    onSessionSelected: (SessionType) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 25.dp, start = 5.dp, end = 5.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        SessionType.entries.forEach { session ->
+            Button(
+                onClick = { onSessionSelected(session) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (session == selectedSession) Color.Green else Color.Gray
+                ),
+                modifier = Modifier
+                    .height(40.dp)
+                    .weight(1f)
+                    .padding(horizontal = 2.dp)
+            ) {
+                Text(text = session.displayName, fontSize = 12.sp)
+            }
+        }
+    }
+}
+
 
 
 /*

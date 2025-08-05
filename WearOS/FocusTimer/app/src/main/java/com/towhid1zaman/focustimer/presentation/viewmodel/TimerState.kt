@@ -1,11 +1,13 @@
 package com.towhid1zaman.focustimer.presentation.viewmodel
 
+import com.towhid1zaman.focustimer.presentation.domain.model.SessionType
+
 data class TimerState (
     val isRunning: Boolean =  false,
-    val timeLeftMillis: Long = 2*60*1000L, // default 2 minutes
-    val totalTimeMillis: Long = 2*60*1000L,
+    val timeLeftMillis: Long = SessionType.POMODORO.durationMillis,
     val isFinished: Boolean = false,
-    val isPaused: Boolean = false
+    val isPaused: Boolean = false,
+    val sessionType: SessionType = SessionType.POMODORO
 )
 /*
 Property and Purpose for better understanding, will delete later :)
