@@ -99,14 +99,13 @@ com.towhid1zaman.focustimer\
 ![Linear Progress](Screenshots/LinearProgress.PNG)
 
 ---
-
-##  Developed by 
-
-**Towhid Zaman**  
-[GitHub Profile](https://github.com/towhid1zaman)
-
+📥 [Download Latest APK](https://github.com/towhid1zaman/Android/releases/tag/v1.0/FocusTimer.apk)
 ---
 
-📥 [Download Latest APK](https://github.com/towhid1zaman/Android/releases/tag/v1.0/FocusTimer.apk)
+##  Developed by  
+[Towhid Zaman](https://github.com/towhid1zaman)
+---
+
+
 
 
