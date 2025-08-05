@@ -28,7 +28,7 @@ fun TimerScreen(viewModel: TimerViewModel = viewModel()) {
         )
 
         // Adds vertical space between the timer and the buttons
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         Row {
             Button(onClick = { viewModel.startTimer() }, enabled = !timerState.isRunning) {
@@ -40,9 +40,14 @@ fun TimerScreen(viewModel: TimerViewModel = viewModel()) {
             Button(onClick = { viewModel.pauseTimer() }, enabled = timerState.isRunning) {
                 Text("Pause")
             }
+        }
 
-            Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(8.dp))
 
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Button(onClick = { viewModel.resetTimer() }) {
                 Text("Reset")
             }

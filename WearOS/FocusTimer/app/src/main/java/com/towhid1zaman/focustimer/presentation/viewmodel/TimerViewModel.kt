@@ -1,5 +1,6 @@
 package com.towhid1zaman.focustimer.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
@@ -16,6 +17,7 @@ class TimerViewModel : ViewModel() {
 
     fun startTimer() {  // Starts a new coroutine and saves its reference in timerJob
         if (_timerState.value.isRunning) return
+        Log.d("TIMER", "Timer started")
 
         _timerState.value = _timerState.value.copy(
             isRunning = true,
